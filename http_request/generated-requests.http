@@ -5,5 +5,5 @@ Content-Type: application/json
 {
   "name": "Jonas",
   "surrname": "Boon",
-  "documentTypes": ["samen", "idewe", "samen", "idewe", "idewe"]
+  "documentTypes": ["samen", "idewe", "samen", "idewe", "idewe", "samen"]
 }
