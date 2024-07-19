@@ -1,0 +1,9 @@
+###
+POST http://localhost:8080/document
+Content-Type: application/json
+
+{
+  "name": "Jonas",
+  "surrname": "Boon",
+  "documentTypes": ["samen", "idewe", "samen", "idewe"]
+}
