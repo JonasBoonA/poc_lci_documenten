@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.DTO.DocumentRequestDTO;
-import com.example.demo.factory.DocumentRequestFactory;
-import com.example.demo.factory.DocumentRequestFactory.DocumentRequest;
+import com.example.demo.factory.DocumentRequest;
 import com.example.demo.registry.utils.RegistryLookUp;
+import jakarta.xml.bind.JAXBContext;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="Volmacht" xmlns="Volmacht" elementFormDefault="qualified" >
+	<xs:complexType name="Document">
+		<xs:all>
+			<xs:element name="LastgeverRechtspersoon" type="LastgeverRechtspersoon"/>
+			<xs:element name="LastgeverNatuurlijkPersoon" type="LastgeverNatuurlijkPersoon"/>
+			<xs:element name="NatuurlijkAlsRechtsPersoon" type="NatuurlijkAlsRechtsPersoon"/>
+			<xs:element name="Lasthebber" type="Lasthebber"/>
+			<xs:element name="Opmaak" type="Opmaak"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="LastgeverRechtspersoon">
+		<xs:sequence>
+			<xs:element name="Ondernemingsnummer" type="xs:string"/>
+			<xs:element name="Rechtsvorm" type="xs:string"/>
+			<xs:element name="NaamPartij" type="xs:string"/>
+			<xs:element name="StraatOfficieelAdres" type="xs:string"/>
+			<xs:element name="Nummer" type="xs:string"/>
+			<xs:element name="Bus" type="xs:string" minOccurs="0"/>
+			<xs:element name="PostcodeOfficieelAdres" type="xs:string"/>
+			<xs:element name="Gemeente" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LastgeverNatuurlijkPersoon">
+		<xs:sequence>
+			<xs:element name="NaamPartij" type="xs:string"/>
+			<xs:element name="InszNummerOndertekenaar" type="InszNummerOndertekenaar"/>
+			<xs:element name="StraatOfficieelAdres" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NatuurlijkAlsRechtsPersoon">
+		<xs:sequence>
+			<xs:element name="WerkgeverSinds" type="xs:string"/>
+			<xs:element name="Contactpersoon" type="xs:string"/>
+			<xs:element name="OfficieelTelefoonnummer" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Lasthebber">
+		<xs:sequence>
+			<xs:element name="Kantoor" type="xs:string"/>
+			<xs:element name="StraatKantoorAdres" type="xs:string"/>
+			<xs:element name="KantoorNr" type="xs:string"/>
+			<xs:element name="KantoorBus" type="xs:string" minOccurs="0"/>
+			<xs:element name="PostcodeKantoorAdres" type="xs:string"/>
+			<xs:element name="KantoorGemeente" type="xs:string"/>
+			<xs:element name="StartDatum" type="DateType"/>
+			<xs:element name="Contractnummer" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Opmaak">
+		<xs:sequence>
+			<xs:element name="ErkenningsnrESS" type="xs:string"/>
+			<xs:element name="Contractnummer" type="xs:string"/>
+			<xs:element name="LocatieOndertekening" type="xs:string"/>
+			<xs:element name="DatumOndertekening" type="DateType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DateType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{2}-\d{2}-\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InszNummerOndertekenaar">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -2,35 +2,32 @@ package com.example.demo.registry.utils;
 
 import com.example.demo.DTO.DocumentRequestDTO;
 import com.example.demo.enums.DocumentTypes;
-import com.example.demo.factory.DocumentRequestFactory;
-import com.example.demo.factory.DocumentRequestFactory.DocumentRequest;
-import com.example.demo.factory.IdeweCreator;
-import com.example.demo.factory.SamenwerkingOvereentkomstCreator;
+import com.example.demo.factory.DocumentRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
-import static com.example.demo.enums.DocumentTypes.IDEWE;
-import static com.example.demo.enums.DocumentTypes.SAMENWERKINGS_OVEREENTKOMST;
+import static com.example.demo.registry.Registry.register;
+
 
 @Component
 @Slf4j
+
 public class RegistryLookUp {
 
-    private static final Map<DocumentTypes, DocumentRequestFactory> register = Map.ofEntries(
-            Map.entry(SAMENWERKINGS_OVEREENTKOMST, new SamenwerkingOvereentkomstCreator()),
-            Map.entry(IDEWE, new IdeweCreator())
-    );
-
+    /**
+     * @description This class will be the place for configuring what to do after finding a creator in the register.
+     * @param documentRequest incoming request from controller
+     * @return A list of payloads
+     */
     public List<DocumentRequest> lookup(DocumentRequestDTO documentRequest) {
         return documentRequest.getDocumentTypes().stream()
                 .map(DocumentTypes::getTypeFromInput)
-                    .peek(t -> log.info("Incoming types: {}", t.getIncomingType()))
+                    .peek(documentType -> log.info("Incoming types: {}", documentType))
                 .map(register::get)
-                .map(creator -> creator.apply(documentRequest))
-                    .peek(t -> log.info("Document Request: {}", t.toString()))
+                .map(creator -> creator.create(documentRequest))
+                   .peek(payload -> log.info("Document Request: {}", payload.toString()))
                 .toList();
     }
 }

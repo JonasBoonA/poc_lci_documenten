@@ -49,10 +49,61 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jaxb</groupId>
+			<artifactId>jaxb-plugins-runtime</artifactId>
+			<version>4.0.8</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb</groupId>
+				<artifactId>jaxb-maven-plugin</artifactId>
+				<version>4.0.8</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<bindingDirectory>
+								${basedir}/src/main/resources/bindings/binding.xjb
+							</bindingDirectory>
+							<extension>true</extension>
+							<args>
+								<arg>-Xinheritance</arg>
+								<arg>-XtoString</arg>
+								<arg>-XautoNameResolution</arg>
+							</args>
+							<plugins>
+								<plugin>
+									<groupId>org.jvnet.jaxb</groupId>
+									<artifactId>jaxb-plugins</artifactId>
+									<version>4.0.8</version>
+								</plugin>
+							</plugins>
+							<schemaDirectory>src/main/resources/xsd</schemaDirectory>
+							<schemaIncludes>
+								<include>*.xsd</include>
+							</schemaIncludes>
+							<bindingDirectory>src/main/resources</bindingDirectory>
+							<bindingIncludes>
+								<include>**/*.xjb</include>
+							</bindingIncludes>
+							<generatePackage>com.example.demo.factory.products</generatePackage>
+							<generateDirectory>target/generated-sources/xsd</generateDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- end::wsdl[] -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

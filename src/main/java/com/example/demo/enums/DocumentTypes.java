@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum DocumentTypes {
 
-    SAMENWERKINGS_OVEREENTKOMST("samen"),
-    IDEWE("idewe");
+    AANSLUITING("aansluiting"),
+    VOLMACHT("volmacht");
 
     private String incomingType;
 
